@@ -45,7 +45,7 @@ const Header = () => {
                 </div>
 
                 {!dados && <ul className='flex items-center gap-2 lg:mt-0 flex-col lg:flex-row w-full justify-end'>
-                    <li><Link href="/login">Entrar</Link></li>
+                    <li className='px-4'><Link href="/login">Entrar</Link></li>
                     <li className='overflow-hidden py-2 rounded-md'><Link href="/registro" className='px-6 py-4 bg-[#613387] text-white rounded-md'>Cadastre-se</Link></li>
                 </ul>}
 
