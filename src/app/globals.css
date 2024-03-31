@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color: rgb(250, 243, 243);
+}
+
+
+.ativo{
+    background-color: #613387;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 7px;
+}
+
+.menuhamb{
+    background-color: #613387;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 7px;
+}
+
+
+.animarModal{
+    animation: animar .3s ease-in-out;
+}
+
+@keyframes animar {
+    from{
+        transform: translate3d(0,-100px,0);
+    } to{
+        transform: translate3d(0,0,0);
+    }
+}
+
+
+.animamenu{
+    animation: animamenu .3s ease-in-out
+}
+
+@keyframes identifier {
+    from {
+        height: 0vh;
+    }
+    from{
+        height: 100vh;
+    }
+}
+
+
+.hamb{
+    border-top: 3px solid #613387;
+    width: 25px;
+    display: block;
+}
+
+.hamb.active{
+    border-top-color: transparent;
+}
+
+
+
+
+.hamb::before,.hamb::after{
+    content: "";
+    width: 25px;
+    height: 3px;
+    background-color: #613387;
+    display: block;
+    margin-top: 6px;
+   transition: ease-in-out .3s;
+   position: relative;
+}
+
+
+.hamb.active::before{
+    content: "";
+    width: 25px;
+    height: 3px;
+    background-color: red;
+    display: block;
+    margin-top: 6px;
+    transform: rotate(135deg);
+}
+
+.hamb.active::after{
+    content: "";
+    width: 25px;
+    height: 3px;
+    background-color: red;
+    display: block;
+    margin-top: 6px;
+    transform: rotate(-135deg);
+    position: relative;
+    top: -9px;
+}
