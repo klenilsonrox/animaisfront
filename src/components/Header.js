@@ -13,13 +13,18 @@ const Header = () => {
     }
 
     useEffect(()=>{
+        if(menu){
+            document.querySelector("body").style.overflow="hidden"
+        } else{
+            document.querySelector("body").style.overflow="auto"
+        }
         const dadosExist = window.localStorage.getItem("infos")||[]
         if(dadosExist && dadosExist.length > 0){
             setDados("true")
         } else{
             localStorage.setItem("infos" ,[])
         }
-    },[])
+    },[menu])
 
     function close(e){
         if(e.target.id==="adotar" || e.target.id==="quemsomos"){
@@ -28,15 +33,18 @@ const Header = () => {
     }
 
 
+
+
+
     return (
-        <header className=' text-[#613387] font-bold  border-b shadow-sm flex w-full bg-white relative py-6'>
+        <header className={ `text-[#613387] font-bold  border-b shadow-sm flex w-full bg-white relative py-6 `}>
             <div className='flex fixed z-50 lg:hidden right-2 top-1 border-b'>
             <button className=' bg-white flex items-center gap-2 lg:hidden absolute right-0 border-2 px-2 rounded-md  py-2' onClick={()=>setOpenMenu(menu=>!menu)}>Menu<span className={`hamb ${menu ? "active":""}`}></span></button>
             </div>
             <nav className={`w-full max-w-7xl mx-auto flex lg:justify-between items-center  right-0 left-0 relative flex-col lg:flex-row overflow-hidden pt-2 ${menu ? "h-screen":"h-0"} transition-all top-[92px] lg:h-auto lg:static  lg:top-0 lg:border-none`}>
             
                 <div className='w-full flex'>
-                    <ul className='flex w-full  max-w-lg flex-col items-center lg:flex-row'>
+                    <ul className={ `flex w-full  max-w-lg flex-col items-center lg:flex-row `}>
                         <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all lg:py-2'><Link href="/" id='quemsomos' onClick={close}>Inicio</Link></li>
                         <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all lg:py-2'><Link href="/quemsomos" id='quemsomos' onClick={close}>Quem somos</Link></li>
                         <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all lg:py-2'><Link href="/" onClick={close} id='adotar'>Quero adotar</Link></li>

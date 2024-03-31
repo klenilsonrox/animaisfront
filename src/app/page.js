@@ -15,6 +15,7 @@ const page = () => {
   const [modalPet,setOpenModalPet]=useState(false)
   const [pet,setPet]=React.useState("")
   const {showLoading,hideLoading,loading}= useLoading()
+  const [isOpen, setIsOpen] = useState(false);
  
 
 
@@ -86,6 +87,7 @@ const page = () => {
     <Header />
     <div className="max-w-7xl w-full mx-auto lg:px-0 mt-4 px-4">
       <img src="/images/bannerg.png" alt="banner dog" className="rounded-md mb-5 w-full max-w-7xl" />
+    
       <div className="max-w-7xl mx-auto lg:px-0 flex gap-4 mb-4">
         <button className="flex-1 bg-[#613387] lg:py-4 py-2 rounded-md text-white text-xl">Quero adotar</button>
         <button className="flex-1 text-[#613387] lg:py-4 py-2 rounded-md border border-[#613387] font-semibold" ><a href="/dashboard">Quero divulgar um pet</a></button>
