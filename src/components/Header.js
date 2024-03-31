@@ -37,14 +37,14 @@ const Header = () => {
             
                 <div className='w-full flex'>
                     <ul className='flex w-full  max-w-lg flex-col items-center lg:flex-row'>
-                        <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all py-2'><Link href="/" id='quemsomos' onClick={close}>Inicio</Link></li>
-                        <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all py-2'><Link href="/quemsomos" id='quemsomos' onClick={close}>Quem somos</Link></li>
-                        <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all py-2'><Link href="/" onClick={close} id='adotar'>Quero adotar</Link></li>
-                        <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all py-2'><Link href="/quero-ajudar">Quero ajudar</Link></li>
+                        <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all lg:py-2'><Link href="/" id='quemsomos' onClick={close}>Inicio</Link></li>
+                        <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all lg:py-2'><Link href="/quemsomos" id='quemsomos' onClick={close}>Quem somos</Link></li>
+                        <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all lg:py-2'><Link href="/" onClick={close} id='adotar'>Quero adotar</Link></li>
+                        <li className='hover:bg-[#613387] px-4 hover:text-white hover:rounded-md transition-all lg:py-2'><Link href="/quero-ajudar">Quero ajudar</Link></li>
                     </ul>
                 </div>
 
-                {!dados && <ul className='flex items-center gap-6 mt-2 lg:mt-0 flex-col lg:flex-row'>
+                {!dados && <ul className='flex items-center gap-2 lg:mt-0 flex-col lg:flex-row w-full justify-end'>
                     <li><Link href="/login">Entrar</Link></li>
                     <li className='overflow-hidden py-2 rounded-md'><Link href="/registro" className='px-6 py-4 bg-[#613387] text-white rounded-md'>Cadastre-se</Link></li>
                 </ul>}

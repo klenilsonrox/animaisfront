@@ -57,7 +57,7 @@ const Login = () => {
 
   return (
     <div className='flex items-start lg:items-center lg:justify-center justify-center h-screen p-2 lg:p-4'>
-        <form className='max-w-5xl w-screen mx-auto flex-col lg:flex-row bg-white mt-[100px] lg:mt-10 rounded-md flex shadow-sm overflow-hidden text-gray-600'>
+        <form className='max-w-5xl w-screen mx-auto flex-col lg:flex-row bg-white mt-[100px] lg:mt-10 rounded-md flex shadow-sm overflow-hidden text-gray-600 p-2'>
 
             <img src="/images/banner.jpg" alt="" className='max-w-[500px] object-cover hidden lg:flex' />
             
