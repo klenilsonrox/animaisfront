@@ -8,6 +8,7 @@ import axios from "axios"
 import { useRouter } from 'next/navigation'
 import buscarToken from '@/utils/buscarToken'
 import Loading from '@/components/Loading'
+import useLoading from '@/hooks/useLoading'
 
 
 
@@ -28,6 +29,8 @@ const { register, handleSubmit, formState: { errors } } = useForm({
   });
 
 const [output,setOutPut]=useState([])
+const [cadastrando,setCadastrando]=React.useState(false)
+const {loading,showLoading,hideLoading}=useLoading()
 
 
 
@@ -54,6 +57,7 @@ const cadastrarPet = async (data) => {
   
    if(token){
     try {
+      setCadastrando(true)
       const res = await axios.post('https://animaisback.onrender.com/pets', novoPet, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -116,7 +120,7 @@ const cadastrarPet = async (data) => {
           </div>
 
           <div className='flex items-center gap-4 mt-4'>
-            <button className='px-8 py-3 rounded-md bg-[#613387] text-white'>Cadastrar pet</button>
+            <button className='px-8 py-3 rounded-md bg-[#613387] text-white' disabled={cadastrando}>Cadastrar pet</button>
             <a href="/dashboard" className='px-8 py-3 rounded-md border shadow-md'>Voltar</a>
           </div>
         </form>
