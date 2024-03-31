@@ -90,7 +90,7 @@ const page = () => {
     
       <div className="max-w-7xl mx-auto lg:px-0 flex gap-4 mb-4">
         <button className="flex-1 bg-[#613387] lg:py-4 py-2 rounded-md text-white text-xl">Quero adotar</button>
-        <button className="flex-1 text-[#613387] lg:py-4 py-2 rounded-md border border-[#613387] font-semibold" ><a href="/dashboard">Quero divulgar um pet</a></button>
+        <button className="flex-1 text-[#613387] lg:py-4 py-2 rounded-md border border-[#613387] font-semibold" ><a href="/dashboard">Quero divulgar</a></button>
       </div>
     <div className="  top-[110px] overflow-x-scroll lg:overflow-x-auto max-w-sm flex py-2 rounded-md gap-2 " onClick={removeAtivo}>
       <button className="text-xl font-bold text-[#613387] bg-white py-2 px-8 rounded-md hover:bg-[#613387] hover:text-white transition-all ativo categ" id="todos"  onClick={renderPet}>todos</button>
