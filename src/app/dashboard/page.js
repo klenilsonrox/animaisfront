@@ -67,6 +67,8 @@ async function atualizarPet(e){
   })
   }catch(error){
     console.log(error)
+  }finally{
+    hideLoading()
   }
  }
 
@@ -93,6 +95,8 @@ async function deletarPet(e){
   setDeleteItem(false)
  }catch(error){
   console.log(error)
+ }finally{
+  hideLoading()
  }
 
 } 
