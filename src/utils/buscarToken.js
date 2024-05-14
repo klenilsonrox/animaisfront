@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 
 export function buscarToken(){
-    const infos = localStorage.getItem("infos")
+    const infos = localStorage.getItem("dadosUser")
     if(infos){
         const {token,id,name}=JSON.parse(infos)
         return {

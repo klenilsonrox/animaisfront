@@ -60,7 +60,7 @@ const Login = () => {
     }
 
     useEffect(()=>{
-      const existDados = localStorage.getItem("infos")|| []
+      const existDados = localStorage.getItem("dadosUser")|| []
       if(infos.loged || existDados.length > 0){
   
       return redirect("/")

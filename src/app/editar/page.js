@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation';
 import buscarToken from '@/utils/buscarToken';
 import useLoading from '@/hooks/useLoading';
 import Loading from '@/components/Loading';
+import BuscarToken from '@/components/Buscartoken';
 
 const page = () => {
 const [name,setName]=React.useState("")
@@ -26,25 +27,25 @@ async function atualizarUsuario(e){
         return
     }
 try{
-    const {token,id}= buscarToken()
+
+
+    const {token,id}= BuscarToken()
 if(token){
     showLoading()
     const rashPass=await hashSync(password, 10)
-    await axios.put(`https://animaisback.onrender.com/users/${id}`,{name,password:rashPass}, {
+    const response = await axios.put(`https://animaisback2.vercel.app/users/${id}`,{name,password:rashPass}, {
         headers: {
-            Authorization: `Bearer ${token}`
+            "Authorization": `Bearer ${token}`
           }
-    }).then(res=>{
-        console.log(res)
-        hideLoading()
-        setName("")
-        setPassword("")
-        setOk("true")
     })
+hideLoading("")
+setOk("true")
+    console.log(response)
 }
 }catch(error){
     console.log(error)
 }
+
 }
 
 useEffect(()=>{

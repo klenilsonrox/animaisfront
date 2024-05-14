@@ -9,7 +9,7 @@ const Header = () => {
     const [menu,setOpenMenu]=useState(false)
 
     function logout() {
-        localStorage.setItem("infos", "")
+        localStorage.setItem("dadosUser", "")
     }
 
     useEffect(()=>{
@@ -18,11 +18,11 @@ const Header = () => {
         } else{
             document.querySelector("body").style.overflow="auto"
         }
-        const dadosExist = window.localStorage.getItem("infos")||[]
+        const dadosExist = window.localStorage.getItem("dadosUser")||[]
         if(dadosExist && dadosExist.length > 0){
             setDados("true")
         } else{
-            localStorage.setItem("infos" ,[])
+            localStorage.setItem("dadosUser" ,[])
         }
     },[menu])
 

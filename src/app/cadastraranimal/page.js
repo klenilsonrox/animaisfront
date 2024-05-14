@@ -1,15 +1,13 @@
 'use client'
 import { UserContext } from '@/components/UserProvider'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {useForm} from "react-hook-form"
 import { z } from 'zod'
 import {zodResolver} from "@hookform/resolvers/zod"
-import axios from "axios"
-import { useRouter } from 'next/navigation'
-import buscarToken from '@/utils/buscarToken'
-import Loading from '@/components/Loading'
+import { redirect, useRouter } from 'next/navigation'
 import useLoading from '@/hooks/useLoading'
-
+import axios from 'axios'
+import BuscarToken from '@/components/Buscartoken'
 
 
 
@@ -28,15 +26,15 @@ const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(createAnimalSchema)
   });
 
-const [output,setOutPut]=useState([])
 const [cadastrando,setCadastrando]=React.useState(false)
-const {loading,showLoading,hideLoading}=useLoading()
+const {loading,Loading,showLoading,hideLoading}=useLoading()
+const [animalCadstrado,setAnimalCadastrado]=useState(false)
 
 
 
 
 React.useEffect(()=>{
-    const dadosExist = localStorage.getItem("infos")
+    const dadosExist = localStorage.getItem("dadosUser")
     if(dadosExist.length > 0){
         infos.setDados(JSON.parse(dadosExist))
     }
@@ -44,38 +42,46 @@ React.useEffect(()=>{
 
 
 const cadastrarPet = async (data) => {
-    setOutPut(JSON.stringify(data, null, 2));
+
+  const {token,id}=BuscarToken()
+
     const novoPet = {
       name: data.name,
       image: data.image,
       idade: data.idade,
       categoria: data.categoria,
-      userRef: infos.dados.id
+      userRef: id
     };
 
-    const {token,id}=buscarToken()
-  
-   if(token){
+
     try {
+
       setCadastrando(true)
-      const res = await axios.post('https://animaisback.onrender.com/pets', novoPet, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      console.log(res);
-      // Verifica se a resposta foi bem-sucedida
-      if (res.status === 200 || res.status === 201) {
-        // Realiza o redirecionamento para o dashboard
-        router.push('/dashboard');
+      showLoading()
+      const dados = await axios.post("https://animaisback2.vercel.app/pets", novoPet, {
+        
+        headers:{
+          "Authorization":`Bearer ${token}`
+        },
+      })
+      hideLoading()
+      if(dados.data.status===201){
+      setAnimalCadastrado(true)
       }
+    
     }
-  
+
        catch (error) {
         console.error('Erro ao enviar requisição:', error);
       }
-    }
+    
   };
+
+  useEffect(()=>{
+    if(animalCadstrado){
+      redirect("/dashboard")
+    }
+  },[animalCadstrado])
 
 
   return (
@@ -124,7 +130,9 @@ const cadastrarPet = async (data) => {
             <a href="/dashboard" className='px-8 py-3 rounded-md border shadow-md'>Voltar</a>
           </div>
         </form>
+
       </div>
+      {loading && <Loading />}
     </div>
   )
 }

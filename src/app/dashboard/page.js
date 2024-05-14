@@ -9,6 +9,7 @@ import Sombra from '@/components/Sombra'
 import Loading from '@/components/Loading'
 import buscarToken from '@/utils/buscarToken'
 import useLoading from '@/hooks/useLoading'
+import getMyPets from '../actions/GetMyPets'
 
 
 
@@ -21,7 +22,7 @@ const page = () => {
   const [idade,setIdade]=useState("")
   const [idPet,setId]=useState("")
   const [categoria,setCategoria]=useState("")
-// const [loading,setLoading]=React.useState(false)
+
 const [deleteItem,setDeleteItem]=React.useState(false)
 const [petDelete,setPetDelete]=React.useState("")
 const [itemupdate,setItemUpadate]=useState("")
@@ -49,11 +50,11 @@ function closeModalDeleteItem(){
 async function atualizarPet(e){
   e.preventDefault()
   showLoading()
- const {token,id}= buscarToken()
+ const {token,id}= JSON.parse(localStorage.getItem("dadosUser"))
  if(token){
   try{
     const pet = {name,idade,image,categoria}
-  await axios.put(`https://animaisback.onrender.com/pets/${itemupdate._id}`, pet ,{
+  await axios.put(`https://animaisback2.vercel.app/pets/${itemupdate._id}`, pet ,{
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -75,10 +76,10 @@ async function atualizarPet(e){
 async function deletarPet(e){
   e.preventDefault()
   showLoading()
-  const {token,id} = buscarToken()
+  const {token,id} = JSON.parse(localStorage.getItem("dadosUser"))
  try{
   if(token){
-    await axios.delete(`https://animaisback.onrender.com/pets/${petDelete._id}` ,{
+    await axios.delete(`https://animaisback2.vercel.app/pets/${petDelete._id}` ,{
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -107,9 +108,8 @@ function openModalDeleteItem(item){
 
 async function buscarMeusPets(id){
     try{
-      await axios.get("https://animaisback.onrender.com/pets").then(res=>{
-        setDados(res.data.filter(it=>it.userRef===id))
-      })
+      const myPets = await getMyPets(id)
+      setDados(myPets)
     }catch(error){
       console.log(error)
     }
@@ -117,7 +117,7 @@ async function buscarMeusPets(id){
 
 
     React.useEffect(()=>{
-      const {token,id} = buscarToken()
+      const {token,id} = JSON.parse(localStorage.getItem("dadosUser"))
       if(token!==undefined && id!==undefined){
         buscarMeusPets(id)
         }  else if(isOk){

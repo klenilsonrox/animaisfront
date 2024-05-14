@@ -34,7 +34,6 @@ getDono()
 
 
 
-
   return (
     <div className='border flex flex-col lg:flex-col  gap-2 cursor-pointer rounded-md overflow-hidden bg-white text-gray-500  mb-4 h-full' {...props} onClick={()=>verPet(item)} >
           <img src={item.image} alt="" className=' min-h-[200px] w-full  lg:w-full object-cover lg:max-w-full h-full lg:max-h-[200px]  transition-all hover:scale-105'   />

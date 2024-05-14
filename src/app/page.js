@@ -8,6 +8,8 @@ import ModalPet from "@/components/ModalPet"
 import Loading from "@/components/Loading"
 import Footer from "@/components/Footer"
 import useLoading from "@/hooks/useLoading"
+import getPets from "./actions/GetAllPets"
+import getOnePet from "./actions/GetOnePet"
 
 const page = () => {
   const infos =React.useContext(UserContext)
@@ -22,19 +24,17 @@ const page = () => {
   async function verPet(pet){
     showLoading()
     setOpenModalPet(true)
-    let petTomodal = await axios.get(`https://animaisback.onrender.com/pets/findone/${pet._id}`)
-    setPet(petTomodal.data)
+    let petTomodal =await getOnePet(pet._id)
+    setPet(petTomodal)
     hideLoading()
   }
 
   async function buscarPets() {
     showLoading()
     try {
-     await axios.get(`https://animaisback.onrender.com/pets`).then(res=>{
-      setDados(res.data)
+      const pets = await getPets()
+      setDados(pets)
       hideLoading()
-     })
-      
     } catch (error) {
       console.error(error);
     }finally{
@@ -56,15 +56,15 @@ const page = () => {
 
   async function renderPet(e){
     if(e.target.id==="todos"){
-      await axios.get(`https://animaisback.onrender.com/pets`).then(res=>(
-     setDados(res.data)
-      ))
+      const pets = await getPets()
+     setDados(pets)
+     
     } else{
       showLoading()
-      await axios.get(`https://animaisback.onrender.com/pets`).then(res=>{
-        setDados(res.data.filter(it=>it.categoria===e.target.id))
+      const pets = await getPets()
+        setDados(pets.filter(it=>it.categoria===e.target.id))
         hideLoading()
-      })
+   
     }
 
   }
