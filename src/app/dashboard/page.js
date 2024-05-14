@@ -88,13 +88,12 @@ async function deletarPet(e){
     }).then(res=>{
       if(res.status===200){
         buscarMeusPets(id)
-        hideLoading()
       }
     })
   }
   setDeleteItem(false)
  }catch(error){
-  console.log(error)
+  console.log(error.response.data.message)
  }finally{
   hideLoading()
  }
